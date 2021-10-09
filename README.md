@@ -2,8 +2,10 @@
 # MySQL
 
 ```shell
-$ mysql -h 127.0.0.1 -P 3306 -u test_user  -p -e "SHOW DATABASES;"
-$ mysql -h 127.0.0.1 -P 3306 -u test_user  -p -e "SELECT * FROM test.test_table;"
+$ mysql -h 127.0.0.1 -P 3306 -u root -p root
+$ mysql -h 127.0.0.1 -P 3306 -u test_user -p -e "SHOW DATABASES;"
+$ mysql -h 127.0.0.1 -P 3306 -u test_user -p -e "SELECT * FROM test.test_table;"
+$ mysql -h 127.0.0.1 -P 3306 -u root -p test_db < school.sql
 ```
 
 # Postgres

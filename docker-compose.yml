@@ -53,7 +53,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./docker/postgres/data:/var/lib/postgresql/data:rw
+      - postgres_db_data_container:/var/lib/postgresql/data:rw
       - ./docker/postgres/sql-scripts:/docker-entrypoint-initdb.d:ro
       - ./docker/postgres/postgres.conf:/etc/postgresql/postgresql.conf
 
@@ -62,4 +62,4 @@ services:
 volumes:
   mysql_db_data_container:
   mariadb_data_container:
-  # postgres_db_data_container:
+  postgres_db_data_container:
