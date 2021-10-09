@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_db_data_container:/var/lib/mysql:rw
+      - ./docker/mysql/sql-scripts:/docker-entrypoint-initdb.d/:ro
+      - ./docker/mysql/mysql.conf:/etc/mysql/conf.d
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=password --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
+# mysql -h 127.0.0.1 -P 3306 -u test_user  -p -e "SHOW DATABASES;"
+# mysql -h 127.0.0.1 -P 3306 -u test_user  -p -e "SELECT * FROM test.test_table;"
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - 3307:3306
+    volumes:
+      - mariadb_data_container:/var/lib/mysql:rw
+      - ./docker/mariadb/sql-scripts:/docker-entrypoint-initdb.d/:ro
+      - ./docker/mariadb/mariadb.conf:/etc/mysql/conf.d
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data:rw
+      - ./docker/postgres/sql-scripts:/docker-entrypoint-initdb.d:ro
+      - ./docker/postgres/postgres.conf:/etc/postgresql/postgresql.conf
+
+
+
+volumes:
+  mysql_db_data_container:
+  mariadb_data_container:
+  # postgres_db_data_container:
