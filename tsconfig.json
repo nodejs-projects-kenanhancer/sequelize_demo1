@@ -13,7 +13,7 @@
     "lib": [
       "es2020"
     ],
-    "outDir": "dist",
+    "outDir": "dist_",
     "declaration": false,
     "declarationMap": false,
     "sourceMap": false,
@@ -28,6 +28,6 @@
     ".webpack/**/*",
     "_warmup/**/*",
     ".vscode/**/*",
-    "./dist/**/*"
+    "dist_/**/*"
   ]
 }

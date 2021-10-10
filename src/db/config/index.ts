@@ -9,7 +9,7 @@ const dbDriver = process.env.DB_DRIVER as Dialect;
 const dbPassword = process.env.DB_PASSWORD as string;
 
 export default {
-  [nodeEnv]: {
+  [nodeEnv || "development"]: {
     host: dbHost,
     database: dbName,
     username: dbUser,

@@ -23,7 +23,13 @@ const seedersEntry = glob.sync('./src/db/seeders/**.ts').reduce(function (obj, e
 }, {});
 
 const entry = {
-  "config/index": './src/db/config/index.ts',
+  "config/index": {
+    import: './src/db/config/index.ts',
+    library: {
+      type: 'commonjs2',
+      export: 'default',
+    }
+  },
   ...modelsEntry,
   ...migrationsEntry,
   ...seedersEntry
@@ -37,7 +43,8 @@ module.exports = {
   // },
   entry,
   output: {
-    libraryTarget: 'commonjs',
+    libraryTarget: 'commonjs2',
+    // libraryExport: 'default',
     path: path.resolve(__dirname, "dist"),
     filename: '[name].js',
     // sourceMapFilename: 'index.js.map',
