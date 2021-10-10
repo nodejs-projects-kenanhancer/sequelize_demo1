@@ -1,9 +1,9 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const glob = require('glob');
-const fs = require('fs');
 const path = require("path");
 const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -38,9 +38,6 @@ const entry = {
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   // devtool: '(none)',
-  // entry: {
-  //   'migrations': { import: './src/db/migrations/20211009004938-create-user.ts', filename: 'migrations/[name].js' }
-  // },
   entry,
   output: {
     libraryTarget: 'commonjs2',
@@ -56,7 +53,16 @@ module.exports = {
     open: true,
     host: "localhost",
   },
-  plugins: [],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "package.json" },
+        { from: "package-lock.json" },
+        { from: ".sequelizerc" },
+        { from: ".env" },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
