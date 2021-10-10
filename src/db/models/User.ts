@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from 'sequelize'
-import sequelizeConnection from '../config'
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelizeConnection from '../config/sequelizeConnection';
 
 interface UserAttributes {
   id: number;
@@ -9,7 +9,6 @@ interface UserAttributes {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-
 }
 export interface UserInput extends Optional<UserAttributes, 'id'> { }
 export interface UserOutput extends Required<UserAttributes> { }

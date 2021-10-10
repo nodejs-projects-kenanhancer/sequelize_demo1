@@ -1,16 +1,19 @@
 require('dotenv').config();
-import { Dialect, Sequelize } from 'sequelize';
+import { Dialect } from 'sequelize';
 
+const nodeEnv = process.env.NODE_ENV as string;
 const dbName = process.env.DB_NAME as string;
 const dbUser = process.env.DB_USER as string;
-const dbHost = process.env.DB_HOST;
+const dbHost = process.env.DB_HOST as string;
 const dbDriver = process.env.DB_DRIVER as Dialect;
-const dbPassword = process.env.DB_PASSWORD;
+const dbPassword = process.env.DB_PASSWORD as string;
 
-const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
-  host: dbHost,
-  dialect: dbDriver,
-  logging: true
-});
-
-export default sequelizeConnection;
+export default {
+  [nodeEnv]: {
+    host: dbHost,
+    database: dbName,
+    username: dbUser,
+    password: dbPassword,
+    dialect: dbDriver
+  }
+};

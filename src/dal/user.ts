@@ -1,4 +1,4 @@
-import { User, UserInput, UserOutput } from '../db/models';
+import { User, UserInput, UserOutput } from '../db/models/User';
 
 export const create = async (payload: UserInput): Promise<UserOutput> => {
     const ingredient = await User.create(payload);

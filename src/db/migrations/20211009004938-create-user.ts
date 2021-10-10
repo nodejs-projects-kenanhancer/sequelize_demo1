@@ -1,33 +1,34 @@
-'use strict';
-module.exports = {
-  up: (queryInterface, Sequelize) => {
+import { DataTypes, QueryInterface } from 'sequelize';
+
+export = {
+  up: (queryInterface: QueryInterface) => {
     return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       lastName: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface: QueryInterface) => {
     return queryInterface.dropTable('Users');
   }
 };
